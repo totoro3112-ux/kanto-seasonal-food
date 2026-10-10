@@ -5,6 +5,7 @@ import { useMemo, useState } from "react";
 import {
   filterFoods,
   getCurrentMonth,
+  KANTO_PREFECTURES,
   type Food,
   type FoodCategory,
 } from "@/data/foods";
@@ -17,23 +18,47 @@ const CATEGORY_TABS: { id: FoodCategory | "all"; label: string }[] = [
   { id: "fruit", label: "果物" },
 ];
 
+const PREFECTURE_TABS: { id: string; label: string }[] = [
+  { id: "all", label: "すべて" },
+  ...KANTO_PREFECTURES.map((prefecture) => ({
+    id: prefecture,
+    label: prefecture,
+  })),
+];
+
 export default function HomePage() {
-  const [month, setMonth] = useState(getCurrentMonth);
-  const [category, setCategory] = useState<FoodCategory | "all">("all");
+  const [selectedMonth, setSelectedMonth] = useState<number | "all">(
+    getCurrentMonth,
+  );
+  const [selectedCategory, setSelectedCategory] = useState<
+    FoodCategory | "all"
+  >("all");
+  const [selectedPrefecture, setSelectedPrefecture] = useState("all");
+  const [searchQuery, setSearchQuery] = useState("");
 
   const items = useMemo(
-    () => filterFoods(month, category),
-    [month, category],
+    () =>
+      filterFoods({
+        selectedMonth,
+        selectedCategory,
+        selectedPrefecture,
+        searchQuery,
+      }),
+    [selectedMonth, selectedCategory, selectedPrefecture, searchQuery],
   );
+
+  function resetFilters() {
+    setSelectedMonth(getCurrentMonth());
+    setSelectedCategory("all");
+    setSelectedPrefecture("all");
+    setSearchQuery("");
+  }
 
   return (
     <div className="mx-auto flex w-full max-w-6xl flex-1 flex-col gap-8 px-4 py-10 sm:px-6">
       <header className="space-y-3">
-        <p className="text-sm font-medium tracking-wide text-orange-600">
-          Kanto Seasonal Guide
-        </p>
         <h1 className="font-serif text-3xl leading-tight text-stone-900 sm:text-4xl">
-          関東の旬食材ナビ 🥦🍎
+          関東の旬食材ナビ
         </h1>
         <p className="max-w-2xl text-sm leading-7 text-stone-600">
           千葉・茨城・群馬・埼玉・栃木・神奈川・東京で、今がおいしい野菜と果物を探せます。
@@ -42,15 +67,60 @@ export default function HomePage() {
 
       <section className="space-y-4" aria-label="絞り込み">
         <div>
+          <label
+            htmlFor="food-search"
+            className="mb-2 block text-xs font-medium text-stone-500"
+          >
+            キーワード検索
+          </label>
+          <div className="relative max-w-md">
+            <span className="pointer-events-none absolute inset-y-0 left-3 flex items-center text-stone-400">
+              <SearchIcon />
+            </span>
+            <input
+              id="food-search"
+              type="text"
+              value={searchQuery}
+              onChange={(event) => setSearchQuery(event.target.value)}
+              placeholder="食材名や説明文で検索"
+              autoComplete="off"
+              className="w-full rounded-full border-0 bg-white py-2.5 pr-11 pl-10 text-sm text-stone-800 ring-1 ring-stone-200 outline-none placeholder:text-stone-400 focus:ring-2 focus:ring-emerald-600"
+            />
+            {searchQuery ? (
+              <button
+                type="button"
+                onClick={() => setSearchQuery("")}
+                className="absolute inset-y-0 right-2 flex items-center rounded-full px-2 text-stone-400 hover:text-stone-700"
+                aria-label="検索キーワードをクリア"
+              >
+                <ClearIcon />
+              </button>
+            ) : null}
+          </div>
+        </div>
+
+        <div>
           <p className="mb-2 text-xs font-medium text-stone-500">月で探す</p>
           <div className="flex flex-wrap gap-2">
+            <button
+              type="button"
+              onClick={() => setSelectedMonth("all")}
+              aria-pressed={selectedMonth === "all"}
+              className={`min-w-14 rounded-full px-3 py-2 text-sm font-medium transition ${
+                selectedMonth === "all"
+                  ? "bg-emerald-700 text-white shadow-sm"
+                  : "bg-white text-stone-700 ring-1 ring-stone-200 hover:bg-emerald-50"
+              }`}
+            >
+              すべて
+            </button>
             {MONTHS.map((value) => {
-              const selected = value === month;
+              const selected = value === selectedMonth;
               return (
                 <button
                   key={value}
                   type="button"
-                  onClick={() => setMonth(value)}
+                  onClick={() => setSelectedMonth(value)}
                   aria-pressed={selected}
                   className={`min-w-14 rounded-full px-3 py-2 text-sm font-medium transition ${
                     selected
@@ -69,12 +139,12 @@ export default function HomePage() {
           <p className="mb-2 text-xs font-medium text-stone-500">種類</p>
           <div className="flex flex-wrap gap-2">
             {CATEGORY_TABS.map((tab) => {
-              const selected = tab.id === category;
+              const selected = tab.id === selectedCategory;
               return (
                 <button
                   key={tab.id}
                   type="button"
-                  onClick={() => setCategory(tab.id)}
+                  onClick={() => setSelectedCategory(tab.id)}
                   aria-pressed={selected}
                   className={`rounded-full px-4 py-2 text-sm font-medium transition ${
                     selected
@@ -88,16 +158,54 @@ export default function HomePage() {
             })}
           </div>
         </div>
+
+        <div>
+          <p className="mb-2 text-xs font-medium text-stone-500">都県</p>
+          <div className="flex flex-wrap gap-2">
+            {PREFECTURE_TABS.map((tab) => {
+              const selected = tab.id === selectedPrefecture;
+              return (
+                <button
+                  key={tab.id}
+                  type="button"
+                  onClick={() => setSelectedPrefecture(tab.id)}
+                  aria-pressed={selected}
+                  className={`rounded-full px-4 py-2 text-sm font-medium transition ${
+                    selected
+                      ? "bg-orange-500 text-white shadow-sm"
+                      : "bg-white text-stone-700 ring-1 ring-stone-200 hover:bg-emerald-50"
+                  }`}
+                >
+                  {tab.label}
+                </button>
+              );
+            })}
+          </div>
+        </div>
       </section>
 
-      <p className="text-sm text-stone-500">
-        {month}月の旬 {items.length}件
-      </p>
+      <div className="flex flex-wrap items-center justify-between gap-3">
+        <p className="text-sm text-stone-600">
+          {items.length}件の旬食材を表示中
+        </p>
+        <button
+          type="button"
+          onClick={resetFilters}
+          className="rounded-full bg-white px-4 py-2 text-sm font-medium text-stone-700 ring-1 ring-stone-200 hover:bg-orange-50"
+        >
+          条件をリセット
+        </button>
+      </div>
 
       {items.length === 0 ? (
-        <p className="rounded-2xl border border-dashed border-orange-200 bg-white/80 p-10 text-center text-stone-500">
-          この条件に合う旬の食材はまだありません。月または種類を変えてみてください。
-        </p>
+        <div className="rounded-2xl border border-dashed border-orange-200 bg-white/80 px-6 py-12 text-center">
+          <p className="font-serif text-xl text-stone-800">
+            該当する食材が見つかりませんでした
+          </p>
+          <p className="mt-2 text-sm text-stone-500">
+            キーワードや月、種類、都県の条件を変えて、もう一度探してみてください。
+          </p>
+        </div>
       ) : (
         <div className="grid gap-5 sm:grid-cols-2 lg:grid-cols-3">
           {items.map((food) => (
@@ -106,6 +214,39 @@ export default function HomePage() {
         </div>
       )}
     </div>
+  );
+}
+
+function SearchIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="h-4 w-4"
+      aria-hidden
+    >
+      <circle cx="11" cy="11" r="7" />
+      <path d="m20 20-3.5-3.5" />
+    </svg>
+  );
+}
+
+function ClearIcon() {
+  return (
+    <svg
+      xmlns="http://www.w3.org/2000/svg"
+      viewBox="0 0 24 24"
+      fill="none"
+      stroke="currentColor"
+      strokeWidth="2"
+      className="h-4 w-4"
+      aria-hidden
+    >
+      <path d="M6 6 18 18M18 6 6 18" />
+    </svg>
   );
 }
 

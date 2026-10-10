@@ -374,13 +374,32 @@ export function getCurrentMonth(now = new Date()): number {
   return Number(parts.find((part) => part.type === "month")?.value ?? 1);
 }
 
-export function filterFoods(
-  month: number,
-  category: FoodCategory | "all",
-): Food[] {
+export function filterFoods({
+  selectedMonth,
+  selectedCategory,
+  selectedPrefecture,
+  searchQuery,
+}: {
+  selectedMonth: number | "all";
+  selectedCategory: FoodCategory | "all";
+  selectedPrefecture: string;
+  searchQuery: string;
+}): Food[] {
+  const query = searchQuery.trim().toLowerCase();
+
   return foods.filter((food) => {
-    const inSeason = food.months.includes(month);
-    const matchesCategory = category === "all" || food.category === category;
-    return inSeason && matchesCategory;
+    const inSeason =
+      selectedMonth === "all" || food.months.includes(selectedMonth);
+    const matchesCategory =
+      selectedCategory === "all" || food.category === selectedCategory;
+    const matchesPrefecture =
+      selectedPrefecture === "all" ||
+      food.prefectures.includes(selectedPrefecture);
+    const matchesSearch =
+      query.length === 0 ||
+      food.name.toLowerCase().includes(query) ||
+      food.description.toLowerCase().includes(query);
+
+    return inSeason && matchesCategory && matchesPrefecture && matchesSearch;
   });
 }
