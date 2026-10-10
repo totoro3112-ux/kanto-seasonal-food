@@ -7,7 +7,7 @@ export type Food = {
   months: number[];
   prefectures: string[];
   description: string;
-  imageEmoji: string;
+  image: string;
 };
 
 export const KANTO_PREFECTURES = [
@@ -30,7 +30,7 @@ export const foods: Food[] = [
     prefectures: ["埼玉"],
     description:
       "埼玉県深谷市の冬ねぎ。軟白栽培で甘みとやわらかさがあり、鍋やすき焼きの定番です。",
-    imageEmoji: "🌱",
+    image: "/images/fukaya-negi.png",
   },
   {
     id: "tochiotome",
@@ -40,7 +40,7 @@ export const foods: Food[] = [
     prefectures: ["栃木"],
     description:
       "栃木県を代表するいちご。果肉がしっかりして甘酸のバランスがよく、贈答用にも人気です。",
-    imageEmoji: "🍓",
+    image: "/images/tochiotome.png",
   },
   {
     id: "boshu-biwa",
@@ -50,7 +50,7 @@ export const foods: Food[] = [
     prefectures: ["千葉"],
     description:
       "南房総の初夏の味覚。果皮が薄く果汁が多い高級びわで、旬が短いのが特徴です。",
-    imageEmoji: "🍊",
+    image: "/images/boshu-biwa.png",
   },
   {
     id: "chiba-peanut",
@@ -60,7 +60,7 @@ export const foods: Food[] = [
     prefectures: ["千葉"],
     description:
       "全国有数の産地・千葉の落花生。秋の茹で落花生は、香ばしさとほくほく感が楽しめます。",
-    imageEmoji: "🥜",
+    image: "/images/chiba-peanut.png",
   },
   {
     id: "komatsuna",
@@ -70,7 +70,7 @@ export const foods: Food[] = [
     prefectures: ["東京", "埼玉", "神奈川"],
     description:
       "江戸川区小松川が名前の由来。冬に甘みが増す、関東の代表的な葉物野菜です。",
-    imageEmoji: "🥬",
+    image: "/images/komatsuna.png",
   },
   {
     id: "hokota-melon",
@@ -80,7 +80,7 @@ export const foods: Food[] = [
     prefectures: ["茨城"],
     description:
       "メロン産地として知られる茨城県鉾田市。初夏に甘みの乗った果実が出回ります。",
-    imageEmoji: "🍈",
+    image: "/images/hokota-melon.png",
   },
   {
     id: "shimonita-negi",
@@ -90,7 +90,7 @@ export const foods: Food[] = [
     prefectures: ["群馬"],
     description:
       "群馬県下仁田町の太いねぎ。加熱するととろける甘さになり、ねぎ鍋に最適です。",
-    imageEmoji: "🌿",
+    image: "/images/shimonita-negi.png",
   },
   {
     id: "miura-daikon",
@@ -100,7 +100,7 @@ export const foods: Food[] = [
     prefectures: ["神奈川"],
     description:
       "三浦半島の冬大根。大きくて水分が多く、おでんやぶり大根に向きます。",
-    imageEmoji: "⚪",
+    image: "/images/miura-daikon.png",
   },
   {
     id: "kasumigaura-renkon",
@@ -110,7 +110,7 @@ export const foods: Food[] = [
     prefectures: ["茨城"],
     description:
       "霞ヶ浦周辺が主産地。穴が小さく肉厚で、煮物でも形が崩れにくいれんこんです。",
-    imageEmoji: "🪷",
+    image: "/images/kasumigaura-renkon.png",
   },
   {
     id: "tomisato-suika",
@@ -120,7 +120,7 @@ export const foods: Food[] = [
     prefectures: ["千葉"],
     description:
       "千葉県富里市の初夏すいか。大玉でシャリ感があり、夏の訪れを感じさせます。",
-    imageEmoji: "🍉",
+    image: "/images/tomisato-suika.png",
   },
   {
     id: "gunma-cabbage",
@@ -130,7 +130,7 @@ export const foods: Food[] = [
     prefectures: ["群馬"],
     description:
       "高原野菜の産地・群馬の春キャベツ。葉がやわらかく、生食や浅漬けに向きます。",
-    imageEmoji: "🥗",
+    image: "/images/gunma-cabbage.png",
   },
   {
     id: "kanto-nashi",
@@ -140,7 +140,7 @@ export const foods: Food[] = [
     prefectures: ["千葉", "茨城", "栃木"],
     description:
       "関東の梨産地が支える秋の味覚。果汁が多く、冷やしてそのまま食べるのが一番です。",
-    imageEmoji: "🍐",
+    image: "/images/kanto-nashi.png",
   },
   {
     id: "ibaraki-sweet-potato",
@@ -150,7 +150,7 @@ export const foods: Food[] = [
     prefectures: ["茨城", "千葉"],
     description:
       "貯蔵して甘みを引き出した秋冬の芋。焼き芋や干しいもでも親しまれます。",
-    imageEmoji: "🍠",
+    image: "/images/ibaraki-sweet-potato.png",
   },
   {
     id: "shonan-gold",
@@ -160,7 +160,7 @@ export const foods: Food[] = [
     prefectures: ["神奈川"],
     description:
       "神奈川生まれの柑橘。爽やかな香りとほろ苦さが特徴で、春先に出回ります。",
-    imageEmoji: "🍋",
+    image: "/images/shonan-gold.png",
   },
 
   // --- 新規追加食材 (20種) ---
@@ -172,7 +172,7 @@ export const foods: Food[] = [
     prefectures: ["群馬"],
     description:
       "群馬県生まれの大粒いちご。上品な甘みと適度な酸味があり、春先（3月＝弥生）以降も味が落ちにくいのが魅力です。",
-    imageEmoji: "🍓",
+    image: "/images/yayoi-hime.png",
   },
   {
     id: "tsumagoi-cabbage",
@@ -182,7 +182,7 @@ export const foods: Food[] = [
     prefectures: ["群馬"],
     description:
       "標高1,000mを超える高冷地で育つ夏秋キャベツ。昼夜の温差により甘みが強く、みずみずしいシャキシャキ感が楽しめます。",
-    imageEmoji: "🥬",
+    image: "/images/tsumagoi-cabbage.png",
   },
   {
     id: "saitama-broccoli",
@@ -192,7 +192,7 @@ export const foods: Food[] = [
     prefectures: ["埼玉"],
     description:
       "深谷・本庄など県北を中心に全国トップクラスの産出額を誇ります。冬場は花蕾が引き締まり特に甘みが増します。",
-    imageEmoji: "🥦",
+    image: "/images/saitama-broccoli.png",
   },
   {
     id: "tokyo-udo",
@@ -202,7 +202,7 @@ export const foods: Food[] = [
     prefectures: ["東京"],
     description:
       "立川市などで地下室（ムロ）を使って太陽光を遮り育てる高級江戸東京野菜。真っ白で柔らかく、シャキッとした歯ごたえと爽やかな香味が特徴です。",
-    imageEmoji: "🎋",
+    image: "/images/tokyo-udo.png",
   },
   {
     id: "ibaraki-chestnut",
@@ -212,7 +212,7 @@ export const foods: Food[] = [
     prefectures: ["茨城"],
     description:
       "栽培面積・生産量ともに日本一を誇る茨城の栗。ほくほくとした風味で栗ご飯や和菓子・洋菓子に広く親しまれています。",
-    imageEmoji: "🌰",
+    image: "/images/ibaraki-chestnut.png",
   },
   {
     id: "ibaraki-hakusai",
@@ -222,7 +222,7 @@ export const foods: Food[] = [
     prefectures: ["茨城"],
     description:
       "八千代町や坂東市などを中心とした全国屈指の白菜王国。霜に当たることで葉がやわらかく甘みが増し、鍋料理に欠かせません。",
-    imageEmoji: "🥬",
+    image: "/images/ibaraki-hakusai.png",
   },
   {
     id: "chosei-tomato",
@@ -232,17 +232,17 @@ export const foods: Food[] = [
     prefectures: ["千葉"],
     description:
       "千葉県長生（ちょうせい）地域のブランドトマト。しっかりとした赤色と甘み、酸味のバランスに優れ、春先に出荷のピークを迎えます。",
-    imageEmoji: "🍅",
+    image: "/images/chosei-tomato.png",
   },
   {
     id: "chiba-cucumber",
-    name: "ちばのきゅうり",
+    name: "千葉のきゅうり",
     category: "vegetable",
     months: [3, 4, 5, 6, 10, 11],
     prefectures: ["千葉"],
     description:
       "旭市などを中心に施設栽培が盛んで関東の食卓を支えます。歯切れが良く、瑞々しさが際立つ初春〜初夏の特産品です。",
-    imageEmoji: "🥒",
+    image: "/images/chiba-cucumber.png",
   },
   {
     id: "odawara-mikan",
@@ -252,7 +252,7 @@ export const foods: Food[] = [
     prefectures: ["神奈川"],
     description:
       "相模湾からの温暖な潮風と日当たりに恵まれた小田原・湯河原の温州みかん。甘味と爽やかな酸味が心地よい秋冬の味覚です。",
-    imageEmoji: "🍊",
+    image: "/images/odawara-mikan.png",
   },
   {
     id: "kamakura-yasai",
@@ -262,7 +262,7 @@ export const foods: Food[] = [
     prefectures: ["神奈川"],
     description:
       "鎌倉近郊の農家が多品種栽培する直売野菜。鮮やかなカラフル人参やラディッシュ、カブなど、都内のレストランでも人気を博しています。",
-    imageEmoji: "🥗",
+    image: "/images/kamakura-yasai.png",
   },
   {
     id: "tochigi-nira",
@@ -272,7 +272,7 @@ export const foods: Food[] = [
     prefectures: ["栃木"],
     description:
       "全国トップクラスの出荷量を誇る栃木のニラ。一番つみの冬ニラは肉厚でやわらかく、強い香りと甘みがあります。",
-    imageEmoji: "🌿",
+    image: "/images/tochigi-nira.png",
   },
   {
     id: "sayama-cha",
@@ -282,7 +282,7 @@ export const foods: Food[] = [
     prefectures: ["埼玉"],
     description:
       "「色は静岡、香りは宇治よ、味は狭山でとどめさす」と歌われる銘茶。寒冷な冬を越すため葉が厚くなり、濃い味わいと深いコクが楽しめます。",
-    imageEmoji: "🍵",
+    image: "/images/sayama-cha.png",
   },
   {
     id: "edamame-gunma",
@@ -292,7 +292,7 @@ export const foods: Food[] = [
     prefectures: ["群馬"],
     description:
       "赤城山麓や沼田エリアなどで栽培される夏のビールのお供。鮮度を保つため早朝に収穫され、風味豊かで甘みの強いのが特徴です。",
-    imageEmoji: "🫛",
+    image: "/images/edamame-gunma.png",
   },
   {
     id: "tama-grape",
@@ -302,7 +302,7 @@ export const foods: Food[] = [
     prefectures: ["東京"],
     description:
       "八王子や世田谷、三鷹などで観光農園を中心に栽培される都産ぶどう。大粒で高糖度なシャインマスカットやピオーネが人気を集めます。",
-    imageEmoji: "🍇",
+    image: "/images/tama-grape.png",
   },
   {
     id: "adachi-spinach",
@@ -312,7 +312,7 @@ export const foods: Food[] = [
     prefectures: ["東京"],
     description:
       "東京・足立区や葛飾区の都市近郊農業で育てられるほうれん草。出荷までの時間が短いため抜群の鮮度で都内市場へ届きます。",
-    imageEmoji: "🥬",
+    image: "/images/adachi-spinach.png",
   },
   {
     id: "ashigara-cha",
@@ -322,7 +322,7 @@ export const foods: Food[] = [
     prefectures: ["神奈川"],
     description:
       "丹沢・箱根山麓の恵まれた気候と清流で育つ神奈川の銘茶。気品ある甘みと爽やかな香りが初夏の訪れを告げます。",
-    imageEmoji: "🍃",
+    image: "/images/ashigara-cha.png",
   },
   {
     id: "boshu-mikan",
@@ -332,7 +332,7 @@ export const foods: Food[] = [
     prefectures: ["千葉"],
     description:
       "南房総の温暖な気候を生かして秋口から収穫される早生みかん。皮が薄く果汁たっぷりで、甘酸っぱさが喉を潤します。",
-    imageEmoji: "🍊",
+    image: "/images/boshu-mikan.png",
   },
   {
     id: "miya-negi",
@@ -342,17 +342,17 @@ export const foods: Food[] = [
     prefectures: ["栃木"],
     description:
       "栃木市で作られるずんぐりとした伝統ねぎ。ずんぐりと太く根元が曲がっており、強い甘みとトロッとした食感が加熱料理で引き立ちます。",
-    imageEmoji: "🌱",
+    image: "/images/miya-negi.png",
   },
   {
     id: "koshigaya-negi",
-    name: "越谷ねgi",
+    name: "越谷ねぎ",
     category: "vegetable",
     months: [12, 1, 2, 3],
     prefectures: ["埼玉"],
     description:
       "埼玉・越谷で作られる伝統の千住系長ねぎ。身が引き締まっていて煮崩れしにくく、料亭や和食店でも珍重される極上品です。",
-    imageEmoji: "🌿",
+    image: "/images/koshigaya-negi.png",
   },
   {
     id: "ibaraki-fig",
@@ -362,7 +362,7 @@ export const foods: Food[] = [
     prefectures: ["茨城"],
     description:
       "かすみがうら市などで栽培される秋のフルーツ。完熟した甘い果肉はそのまま食べるほか、ジャムやコンポートにしても美味です。",
-    imageEmoji: "無",
+    image: "/images/ibaraki-fig.png",
   },
 ];
 

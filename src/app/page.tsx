@@ -1,5 +1,6 @@
 "use client";
 
+import Image from "next/image";
 import { useMemo, useState } from "react";
 import {
   filterFoods,
@@ -108,18 +109,32 @@ export default function HomePage() {
   );
 }
 
+function FoodThumb({ src, alt }: { src: string; alt: string }) {
+  const [failed, setFailed] = useState(false);
+
+  return (
+    <span className="relative block h-14 w-14 overflow-hidden rounded-2xl bg-gradient-to-br from-emerald-50 to-orange-50">
+      {failed ? null : (
+        <Image
+          src={src}
+          alt={alt}
+          fill
+          sizes="56px"
+          className="object-cover"
+          onError={() => setFailed(true)}
+        />
+      )}
+    </span>
+  );
+}
+
 function FoodCard({ food }: { food: Food }) {
   const isVegetable = food.category === "vegetable";
 
   return (
     <article className="flex flex-col rounded-2xl border border-orange-100 bg-white p-5 shadow-sm shadow-orange-950/5 transition hover:-translate-y-0.5 hover:shadow-md">
       <div className="flex items-start justify-between gap-3">
-        <span
-          className="flex h-14 w-14 items-center justify-center rounded-2xl bg-gradient-to-br from-emerald-50 to-orange-50 text-3xl"
-          aria-hidden
-        >
-          {food.imageEmoji}
-        </span>
+        <FoodThumb src={food.image} alt={food.name} />
         <span
           className={`rounded-full px-2.5 py-1 text-xs font-medium ${
             isVegetable
