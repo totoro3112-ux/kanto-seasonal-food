@@ -15,7 +15,7 @@ const serif = Shippori_Mincho({
 });
 
 export const metadata: Metadata = {
-  title: "関東の旬食材ナビ 🥦🍎",
+  title: "関東の旬食材ナビ",
   description:
     "関東7都県で今が旬の野菜と果物を、月と種類から探せる案内アプリです。",
 };
